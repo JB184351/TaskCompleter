@@ -10,13 +10,21 @@ import UIKit
 
 class ViewController: UITableViewController {
     
-    var tasks: [String] = []
+  var tasks: [String] = [] {
+    didSet {
+      tableView.reloadData()
+    }
+  }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addTask))
         loadTasks()
+        setupUI()
         tableView.reloadData()
+    }
+    
+    private func setupUI() {
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addTask))
     }
     
     @objc func addTask() {
@@ -30,8 +38,6 @@ class ViewController: UITableViewController {
         
         ac.addAction(submitTask)
         present(ac, animated: true)
-        
-        tableView.reloadData()
     }
     
     func submitTask(_ task: String) {
@@ -41,36 +47,15 @@ class ViewController: UITableViewController {
         tableView.insertRows(at: [indexPath], with: .automatic)
     }
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return tasks.count
-    }
-    
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Task", for: indexPath)
-        cell.textLabel?.text = tasks[indexPath.row]
-        
-        return cell
-    }
-    
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let vc = storyboard?.instantiateViewController(withIdentifier: "Detail") as? DetailViewController {
-            title = tasks[indexPath.row]
-            navigationController?.pushViewController(vc, animated: true)
-        }
-    }
-    
-    func saveTasks(tasks: [String]) {
+    private func saveTasks(tasks: [String]) {
         let defaults = UserDefaults.standard
         defaults.set(tasks, forKey: "tasks")
     }
     
-    func loadTasks() {
+    private func loadTasks() {
         tasks = UserDefaults.standard.array(forKey: "tasks") as? [String] ?? []
         print(tasks)
     }
-    
-    
-
-
+  
 }
 
