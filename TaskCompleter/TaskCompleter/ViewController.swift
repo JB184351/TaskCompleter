@@ -8,13 +8,9 @@
 
 import UIKit
 
-class ViewController: UITableViewController {
+class TaskViewController: UITableViewController {
     
-  var tasks: [String] = [] {
-    didSet {
-      tableView.reloadData()
-    }
-  }
+    var tasks: [String] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,10 +37,12 @@ class ViewController: UITableViewController {
     }
     
     func submitTask(_ task: String) {
-        tasks.insert(task, at: 0)
+        tableView.performBatchUpdates(
+        {tasks.insert(task, at: 0)
         let indexPath = IndexPath(row: 0, section: 0)
         saveTasks(tasks: tasks)
         tableView.insertRows(at: [indexPath], with: .automatic)
+        }, completion: nil)
     }
     
     private func saveTasks(tasks: [String]) {

@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-extension ViewController {
+extension TaskViewController {
   
   override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return tasks.count
@@ -23,7 +23,7 @@ extension ViewController {
   }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let vc = storyboard?.instantiateViewController(withIdentifier: "Detail") as? DetailViewController {
+        if let vc = storyboard?.instantiateViewController(withIdentifier: "Detail") as? DetailTaskViewController {
             title = tasks[indexPath.row]
             navigationController?.pushViewController(vc, animated: true)
         }
