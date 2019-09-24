@@ -9,12 +9,23 @@
 import UIKit
 
 class DetailTaskViewController: UIViewController {
-
+    @IBOutlet var taskLabel: UILabel!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
     }
+    
+    private func setupDetailVIewUI() {
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editTask))
+    }
+    
+    @objc func editTask(_ task: String) {
+        
+    }
+    
     
     
 

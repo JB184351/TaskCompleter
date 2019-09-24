@@ -53,13 +53,30 @@
                     <view key="view" contentMode="scaleToFill" id="HYe-cn-hYh">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="87A-vL-vP0">
+                                <rect key="frame" x="20" y="84" width="367" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="eil-xr-gbM" firstAttribute="bottom" secondItem="87A-vL-vP0" secondAttribute="bottom" constant="757" id="ZAE-9d-U9W"/>
+                            <constraint firstItem="87A-vL-vP0" firstAttribute="leading" secondItem="eil-xr-gbM" secondAttribute="leading" constant="20" id="hQU-2b-eDt"/>
+                            <constraint firstItem="eil-xr-gbM" firstAttribute="trailing" secondItem="87A-vL-vP0" secondAttribute="trailing" constant="27" id="nbO-Ir-cba"/>
+                            <constraint firstItem="87A-vL-vP0" firstAttribute="top" secondItem="eil-xr-gbM" secondAttribute="top" constant="40" id="vir-28-rx0"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="eil-xr-gbM"/>
                     </view>
+                    <connections>
+                        <outlet property="taskLabel" destination="87A-vL-vP0" id="TV5-86-pRb"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jBD-hK-lR1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1855" y="132"/>
+            <point key="canvasLocation" x="1853.6231884057972" y="131.91964285714286"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="JpM-sg-09G">
