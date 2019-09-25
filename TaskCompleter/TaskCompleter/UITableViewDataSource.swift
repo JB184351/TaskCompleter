@@ -18,13 +18,12 @@ extension TaskViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: "Task", for: indexPath)
     cell.textLabel?.text = tasks[indexPath.row]
-    
     return cell
   }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let vc = storyboard?.instantiateViewController(withIdentifier: "Detail") as? DetailTaskViewController {
-            title = tasks[indexPath.row]
+            task = tasks[indexPath.row]
             navigationController?.pushViewController(vc, animated: true)
         }
     }

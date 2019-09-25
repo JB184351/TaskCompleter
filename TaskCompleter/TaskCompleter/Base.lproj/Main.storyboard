@@ -41,6 +41,9 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="oCc-Hg-gmB"/>
+                    <connections>
+                        <segue destination="d8u-OO-orh" kind="presentation" id="IgP-f5-gQO"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jbc-8s-6hp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -49,13 +52,13 @@
         <!--Detail Task View Controller-->
         <scene sceneID="OSJ-ve-llG">
             <objects>
-                <viewController storyboardIdentifier="Detail" id="d8u-OO-orh" customClass="DetailTaskViewController" customModule="TaskCompleter" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DetailTask" id="d8u-OO-orh" customClass="DetailTaskViewController" customModule="TaskCompleter" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="HYe-cn-hYh">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="87A-vL-vP0">
-                                <rect key="frame" x="20" y="84" width="367" height="21"/>
+                                <rect key="frame" x="20" y="40" width="367" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -63,13 +66,13 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="eil-xr-gbM" firstAttribute="bottom" secondItem="87A-vL-vP0" secondAttribute="bottom" constant="757" id="ZAE-9d-U9W"/>
-                            <constraint firstItem="87A-vL-vP0" firstAttribute="leading" secondItem="eil-xr-gbM" secondAttribute="leading" constant="20" id="hQU-2b-eDt"/>
-                            <constraint firstItem="eil-xr-gbM" firstAttribute="trailing" secondItem="87A-vL-vP0" secondAttribute="trailing" constant="27" id="nbO-Ir-cba"/>
-                            <constraint firstItem="87A-vL-vP0" firstAttribute="top" secondItem="eil-xr-gbM" secondAttribute="top" constant="40" id="vir-28-rx0"/>
+                            <constraint firstItem="87A-vL-vP0" firstAttribute="leading" secondItem="HYe-cn-hYh" secondAttribute="leadingMargin" id="W5b-t1-nmQ"/>
+                            <constraint firstItem="eil-xr-gbM" firstAttribute="trailing" secondItem="87A-vL-vP0" secondAttribute="trailing" constant="27" id="l0I-Fz-drw"/>
+                            <constraint firstItem="87A-vL-vP0" firstAttribute="top" secondItem="eil-xr-gbM" secondAttribute="top" constant="40" id="lYA-97-cDg"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="eil-xr-gbM"/>
                     </view>
+                    <navigationItem key="navigationItem" id="g6j-uQ-ewn"/>
                     <connections>
                         <outlet property="taskLabel" destination="87A-vL-vP0" id="TV5-86-pRb"/>
                     </connections>

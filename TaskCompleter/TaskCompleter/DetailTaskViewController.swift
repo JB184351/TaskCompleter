@@ -10,12 +10,11 @@ import UIKit
 
 class DetailTaskViewController: UIViewController {
     @IBOutlet var taskLabel: UILabel!
-    
+    var currentTask = String()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        setupDetailVIewUI()
     }
     
     private func setupDetailVIewUI() {
