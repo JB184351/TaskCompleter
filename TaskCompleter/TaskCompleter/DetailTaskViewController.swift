@@ -18,6 +18,7 @@ class DetailTaskViewController: UIViewController {
     }
     
     private func setupDetailVIewUI() {
+        taskLabel?.text = currentTask
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editTask))
     }
     
