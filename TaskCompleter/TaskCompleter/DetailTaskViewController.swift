@@ -11,6 +11,8 @@ import UIKit
 class DetailTaskViewController: UIViewController {
     @IBOutlet var taskLabel: UILabel!
     var currentTask = String()
+    @IBOutlet var taskDetails: UITextField!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
