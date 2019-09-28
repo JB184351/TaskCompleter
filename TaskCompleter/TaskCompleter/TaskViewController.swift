@@ -55,15 +55,6 @@ class TaskViewController: UITableViewController {
         tasks = UserDefaults.standard.array(forKey: "tasks") as? [String] ?? []
         print(tasks)
     }
-    
-//    private func showTaskDetail() {
-//        performSegue(withIdentifier: "DetailTask", sender: self)
-//    }
-//
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        var vc = segue.destination as? DetailTaskViewController
-//        vc?.currentTask = self.task
-//    }
   
 }
 
