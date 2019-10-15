@@ -61,7 +61,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Task Details Go Here" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Ec5-ZS-als">
-                                <rect key="frame" x="8" y="81" width="398" height="773"/>
+                                <rect key="frame" x="8" y="123" width="398" height="731"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -74,12 +74,16 @@
                             <constraint firstItem="ROk-U9-dVx" firstAttribute="centerX" secondItem="HYe-cn-hYh" secondAttribute="centerX" id="Ocr-aJ-UhD"/>
                             <constraint firstItem="Ec5-ZS-als" firstAttribute="leading" secondItem="eil-xr-gbM" secondAttribute="leading" constant="8" id="Qkh-WZ-chK"/>
                             <constraint firstItem="ROk-U9-dVx" firstAttribute="top" secondItem="eil-xr-gbM" secondAttribute="top" constant="8" id="b3p-8m-V1Z"/>
-                            <constraint firstItem="Ec5-ZS-als" firstAttribute="top" secondItem="ROk-U9-dVx" secondAttribute="bottom" constant="8" id="gO5-XF-jD9"/>
+                            <constraint firstItem="Ec5-ZS-als" firstAttribute="top" secondItem="ROk-U9-dVx" secondAttribute="bottom" constant="50" id="gO5-XF-jD9"/>
                             <constraint firstItem="eil-xr-gbM" firstAttribute="bottom" secondItem="Ec5-ZS-als" secondAttribute="bottom" constant="8" id="tpm-0a-e6H"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="eil-xr-gbM"/>
                     </view>
                     <navigationItem key="navigationItem" id="g6j-uQ-ewn"/>
+                    <connections>
+                        <outlet property="taskDetails" destination="Ec5-ZS-als" id="4P5-pM-ntz"/>
+                        <outlet property="taskLabel" destination="ROk-U9-dVx" id="2nD-oT-Ug5"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jBD-hK-lR1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

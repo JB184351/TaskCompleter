@@ -10,22 +10,28 @@ import UIKit
 
 class DetailTaskViewController: UIViewController {
     @IBOutlet var taskLabel: UILabel!
+    @IBOutlet var taskDetails: UITextView!
     var currentTask = String()
-    @IBOutlet var taskDetails: UITextField!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupDetailVIewUI()
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
+        view.addGestureRecognizer(tap)
     }
     
     private func setupDetailVIewUI() {
         taskLabel?.text = currentTask
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editTask))
+        //navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editTask))
     }
     
-    @objc func editTask(_ task: String) {
-        print("Edit")
+//    @objc func editTask(_ task: String) {
+//        print("Edit")
+//    }
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
     }
     
     
