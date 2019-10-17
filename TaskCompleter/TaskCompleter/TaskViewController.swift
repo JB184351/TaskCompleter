@@ -10,6 +10,7 @@ import UIKit
 
 class TaskViewController: UITableViewController {
     
+    var tasksandDetails: [String:String] = [:]
     var tasks: [String] = []
     var task: String = ""
     
@@ -55,6 +56,12 @@ class TaskViewController: UITableViewController {
         tasks = UserDefaults.standard.array(forKey: "tasks") as? [String] ?? []
         print(tasks)
     }
+    
+//    private func getKeys() {
+//        tasksandDetails = tasks.reduce(into: [String: String](), { currentTask, item in tasks[item] = ""
+//
+//    })
+//    }
   
 }
 
