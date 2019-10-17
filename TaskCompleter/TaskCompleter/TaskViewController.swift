@@ -53,7 +53,6 @@ class TaskViewController: UITableViewController {
     
     private func loadTasks() {
         tasks = UserDefaults.standard.array(forKey: "tasks") as? [String] ?? []
-        print(tasks)
     }
   
 }

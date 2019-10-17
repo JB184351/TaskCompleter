@@ -12,7 +12,7 @@ class DetailTaskViewController: UIViewController {
     @IBOutlet var taskLabel: UILabel!
     @IBOutlet var taskDetails: UITextView!
     var currentTask = String()
-    
+    var currentTaskDetails = String()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,15 +23,42 @@ class DetailTaskViewController: UIViewController {
     
     private func setupDetailVIewUI() {
         taskLabel?.text = currentTask
-        //navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editTask))
+        currentTaskDetails = taskDetails.text
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editTask))
+        taskDetails.text = "Placeholder"
+        taskDetails.textColor = .lightGray
+        
     }
     
-//    @objc func editTask(_ task: String) {
-//        print("Edit")
-//    }
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView.textColor == .lightGray {
+            textView.textColor = .black
+        }
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if textView.text.isEmpty {
+            textView.text = "Placeholder"
+            textView.textColor = .lightGray
+        }
+    }
+    
+    @objc func editTask(_ task: String) {
+        print("Edit")
+    }
     
     @objc func dismissKeyboard() {
         view.endEditing(true)
+    }
+    
+    private func saveTasks(tasks: [String]) {
+        let defaults = UserDefaults.standard
+        defaults.set(currentTaskDetails, forKey: "taskDetails")
+    }
+    
+    private func loadTasks() {
+        currentTaskDetails = UserDefaults.standard.string(forKey: "taskDetails") ?? ""
+        print(currentTaskDetails)
     }
     
     
