@@ -10,7 +10,6 @@ import UIKit
 
 class TaskViewController: UITableViewController {
     
-    var tasksandDetails: [String:String] = [:]
     var tasks: [String] = []
     var task: String = ""
     
@@ -19,6 +18,7 @@ class TaskViewController: UITableViewController {
         loadTasks()
         setupUI()
         tableView.reloadData()
+        print(tasks)
     }
     
     private func setupUI() {
@@ -49,19 +49,21 @@ class TaskViewController: UITableViewController {
     
     private func saveTasks(tasks: [String]) {
         let defaults = UserDefaults.standard
-        defaults.set(tasks, forKey: "tasks")
+        let taskcompleter = TaskCompleter(title: tasks, taskDetail: nil, taskCompleted: nil)
+        if let data = try? JSONEncoder().encode(taskcompleter) {
+            defaults.set(data, forKey: "task")
+        }
+        
     }
     
     private func loadTasks() {
-        tasks = UserDefaults.standard.array(forKey: "tasks") as? [String] ?? []
-        print(tasks)
+        if let savedTasks = UserDefaults.standard.object(forKey: "task") as? Data {
+            let decoder = JSONDecoder()
+            if let loadedTask = try? decoder.decode(TaskCompleter.self, from: savedTasks) {
+                print(loadedTask.title)
+            }
+        }
     }
-    
-//    private func getKeys() {
-//        tasksandDetails = tasks.reduce(into: [String: String](), { currentTask, item in tasks[item] = ""
-//
-//    })
-//    }
   
 }
 
