@@ -57,8 +57,8 @@ class TaskViewController: UITableViewController {
     private func loadTasks() {
         if let savedTasks = UserDefaults.standard.object(forKey: "task") as? Data {
             let decoder = JSONDecoder()
-            if let loadedTask = try? decoder.decode(TaskCompleterModel.self, from: savedTasks) {
-                print(loadedTask.title)
+            if let loadedTasks = try? decoder.decode([TaskCompleterModel].self, from: savedTasks) {
+                print(loadedTasks)
             }
         }
     }
