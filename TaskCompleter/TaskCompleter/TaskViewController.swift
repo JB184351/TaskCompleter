@@ -10,7 +10,8 @@ import UIKit
 
 class TaskViewController: UITableViewController {
     
-    var tasks: [TaskCompleter] = []
+    var tasks: [String] = []
+    var taskcompleter: [TaskCompleter] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,28 +31,26 @@ class TaskViewController: UITableViewController {
         
         let submitTask = UIAlertAction(title: "Submit", style: .default) { [weak self, weak ac] action in
             guard let task = ac?.textFields?[0].text else { return }
-            let transformedString = task.compactMap {$0 as? [String]}
-            let transformedTask = transformedString.compactMap {$0 as? TaskCompleter}
-            self?.submitTask(transformedTask)
+            self?.submitTask(task)
         }
         
         ac.addAction(submitTask)
         present(ac, animated: true)
     }
     
-    func submitTask(_ task: TaskCompleter) {
+    func submitTask(_ task: String) {
         tableView.performBatchUpdates(
-            {tasks.insert(task, at: 0)
+        {tasks.insert(task, at: 0)
         let indexPath = IndexPath(row: 0, section: 0)
-                saveTasks(task: [], tasks: tasks)
+        saveTasks(task: tasks)
         tableView.insertRows(at: [indexPath], with: .automatic)
         }, completion: nil)
     }
     
-    private func saveTasks(task: [String], tasks: [TaskCompleter]) {
+    private func saveTasks(task: [String]) {
         let defaults = UserDefaults.standard
-        let taskcompleter = TaskCompleter(title: task, taskDetail: nil, taskCompleted: nil)
-        if let data = try? JSONEncoder().encode(taskcompleter) {
+        let transformedTaskCompleter = task.map { TaskCompleter(from: $0) }
+        if let data = try? JSONEncoder().encode(transformedTaskCompleter) {
             defaults.set(data, forKey: "task")
         }
         
