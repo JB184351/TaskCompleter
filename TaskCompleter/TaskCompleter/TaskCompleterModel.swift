@@ -1,5 +1,5 @@
 //
-//  TaskCompleterProperties.swift
+//  TaskCompleterModel.swift
 //  TaskCompleter
 //
 //  Created by Justin Bengtson on 10/19/19.
@@ -8,8 +8,8 @@
 
 import Foundation
 
-struct TaskCompleter: Codable {
-    var title: [String]
+struct TaskCompleterModel: Codable {
+    var title: String
     let taskDetail: String?
     let taskCompleted: Bool?
 }
