@@ -17,7 +17,6 @@ class TaskViewController: UITableViewController {
         loadTasks()
         setupUI()
         tableView.reloadData()
-        print(tasksDataSource)
     }
     
     private func setupUI() {
