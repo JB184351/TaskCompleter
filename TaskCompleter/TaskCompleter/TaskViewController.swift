@@ -10,14 +10,14 @@ import UIKit
 
 class TaskViewController: UITableViewController {
     
-    var tasks: [String] = []
-    var task: String = ""
+    var tasksDataSource: [String] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         loadTasks()
         setupUI()
         tableView.reloadData()
+        print(tasksDataSource)
     }
     
     private func setupUI() {
@@ -38,22 +38,29 @@ class TaskViewController: UITableViewController {
     }
     
     func submitTask(_ task: String) {
-        tableView.performBatchUpdates(
-        {tasks.insert(task, at: 0)
-        let indexPath = IndexPath(row: 0, section: 0)
-        saveTasks(tasks: tasks)
-        tableView.insertRows(at: [indexPath], with: .automatic)
+        tableView.performBatchUpdates({
+            tasksDataSource.insert(task, at: 0)
+            let indexPath = IndexPath(row: 0, section: 0)
+            saveTasks(tasks: tasksDataSource)
+            tableView.insertRows(at: [indexPath], with: .automatic)
         }, completion: nil)
     }
     
     private func saveTasks(tasks: [String]) {
         let defaults = UserDefaults.standard
-        defaults.set(tasks, forKey: "tasks")
+        let transformedTaskCompleter = tasks.map { TaskCompleterModel(title: $0, taskDetail: nil, taskCompleted: nil) }
+        if let data = try? JSONEncoder().encode(transformedTaskCompleter) {
+            defaults.set(data, forKey: "task")
+        }
     }
     
     private func loadTasks() {
-        tasks = UserDefaults.standard.array(forKey: "tasks") as? [String] ?? []
-        print(tasks)
+        if let savedTasks = UserDefaults.standard.object(forKey: "task") as? Data {
+            let decoder = JSONDecoder()
+            if let loadedTasks = try? decoder.decode([TaskCompleterModel].self, from: savedTasks) {
+                print(loadedTasks)
+            }
+        }
     }
   
 }
