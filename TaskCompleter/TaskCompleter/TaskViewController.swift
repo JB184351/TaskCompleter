@@ -10,7 +10,8 @@ import UIKit
 
 class TaskViewController: UITableViewController {
     
-    var tasksDataSource: [String] = []
+    //var tasksDataSource: [String] = []
+    var taskCompleterDataSource: [TaskCompleterModel] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,11 +37,12 @@ class TaskViewController: UITableViewController {
         present(ac, animated: true)
     }
     
-    func submitTask(_ task: String) {
+    private func submitTask(_ task: String) {
+        taskCompleterDataSource[0].title = task
         tableView.performBatchUpdates({
-            tasksDataSource.insert(task, at: 0)
+            taskCompleterDataSource[0].title.insert(taskCompleterDataSource[0].title[0], at: 0)
             let indexPath = IndexPath(row: 0, section: 0)
-            saveTasks(tasks: tasksDataSource)
+            saveTasks(tasks: [taskCompleterDataSource[0].title])
             tableView.insertRows(at: [indexPath], with: .automatic)
         }, completion: nil)
     }
@@ -57,10 +59,16 @@ class TaskViewController: UITableViewController {
         if let savedTasks = UserDefaults.standard.object(forKey: "task") as? Data {
             let decoder = JSONDecoder()
             if let loadedTasks = try? decoder.decode([TaskCompleterModel].self, from: savedTasks) {
-                print(loadedTasks)
+                taskCompleterDataSource = loadedTasks
+                print(taskCompleterDataSource)
             }
         }
     }
+    
+//    private func loadTableView() {
+//        let defaults = UserDefaults.standard
+//        let task = defaults.value(forKey: "task") as? String ?? ""
+//    }
   
 }
 

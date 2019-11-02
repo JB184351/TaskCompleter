@@ -12,12 +12,12 @@ import UIKit
 extension TaskViewController {
   
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return tasksDataSource.count
+        return taskCompleterDataSource.count
   }
   
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Task", for: indexPath)
-        cell.textLabel?.text = tasksDataSource[indexPath.row]
+        cell.textLabel?.text = taskCompleterDataSource[indexPath.row].title
         return cell
   }
     
@@ -26,5 +26,10 @@ extension TaskViewController {
             vc.currentTask = tasksDataSource[indexPath.row]
             navigationController?.pushViewController(vc, animated: true)
         }
+    }
+    
+    func stringToTaskCompleter() {
+        let stringToTaskCompleter = tasksDataSource.map { TaskCompleterModel(title: $0, taskDetail: nil, taskCompleted: nil)}
+        print(stringToTaskCompleter[0].title)
     }
 }
