@@ -38,7 +38,7 @@ class TaskViewController: UITableViewController {
     
     func submitTask(_ task: String) {
         tableView.performBatchUpdates({
-            tasksDataSource.insert(TaskCompleterModel(title: task, taskDetail: nil, taskCompleted: nil), at: 0)
+            tasksDataSource.insert(TaskCompleterModel(name: task, taskDetail: nil, taskCompleted: nil), at: 0)
             let indexPath = IndexPath(row: 0, section: 0)
             saveTasks(tasks: tasksDataSource)
             tableView.insertRows(at: [indexPath], with: .automatic)
@@ -56,7 +56,6 @@ class TaskViewController: UITableViewController {
         if let savedTasks = UserDefaults.standard.object(forKey: "task") as? Data {
             let decoder = JSONDecoder()
             if let loadedTasks = try? decoder.decode([TaskCompleterModel].self, from: savedTasks) {
-                print(loadedTasks)
                 tasksDataSource = loadedTasks
             }
         }

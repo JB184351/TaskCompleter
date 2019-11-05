@@ -23,12 +23,16 @@ class DetailTaskViewController: UIViewController {
     
     private func setupDetailVIewUI() {
         taskLabel?.text = currentTask
-        //navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editTask))
     }
     
-//    @objc func editTask(_ task: String) {
-//        print("Edit")
-//    }
+    private func saveTaskDetails(with taskDetails: String) {
+        let defaults = UserDefaults.standard
+        defaults.set(TaskCompleterModel(name: currentTask, taskDetail: taskDetails, taskCompleted: nil), forKey: "taskDetails")
+    }
+    
+    private func loadTaskDetails() {
+        
+    }
     
     @objc func dismissKeyboard() {
         view.endEditing(true)
