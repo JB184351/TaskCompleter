@@ -12,18 +12,18 @@ import UIKit
 extension TaskViewController {
   
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return tasksDataSource.count
+        return TaskStorage.sharedTaskStorage.taskDataSource.count
   }
   
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Task", for: indexPath)
-        cell.textLabel?.text = tasksDataSource[indexPath.row].name
+        cell.textLabel?.text = TaskStorage.sharedTaskStorage.taskDataSource[indexPath.row].name
         return cell
   }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let vc = storyboard?.instantiateViewController(withIdentifier: "DetailTask") as? DetailTaskViewController {
-            vc.currentTask = tasksDataSource[indexPath.row].name
+            vc.currentTask = TaskStorage.sharedTaskStorage.taskDataSource[indexPath.row].name
             navigationController?.pushViewController(vc, animated: true)
         }
     }

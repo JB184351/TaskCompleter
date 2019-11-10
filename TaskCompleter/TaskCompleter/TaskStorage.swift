@@ -8,13 +8,14 @@
 
 import Foundation
 
-class SaveLoadTaskCompleterModels {
+final class TaskStorage {
 
-    var tasksDataSource = [TaskCompleterModel]()
+    static let sharedTaskStorage = TaskStorage()
+    var taskDataSource = [TaskCompleterModel]()
     
-    func saveTasks(tasks: [TaskCompleterModel]) {
+    func saveTasks(taskDataSource: [TaskCompleterModel]) {
         let defaults = UserDefaults.standard
-        if let data = try? JSONEncoder().encode(tasks) {
+        if let data = try? JSONEncoder().encode(taskDataSource) {
             defaults.set(data, forKey: "task")
         }
     }
@@ -23,7 +24,7 @@ class SaveLoadTaskCompleterModels {
         if let savedTasks = UserDefaults.standard.object(forKey: "task") as? Data {
             let decoder = JSONDecoder()
             if let loadedTasks = try? decoder.decode([TaskCompleterModel].self, from: savedTasks) {
-                tasksDataSource = loadedTasks
+                taskDataSource = loadedTasks
             }
         }
     }

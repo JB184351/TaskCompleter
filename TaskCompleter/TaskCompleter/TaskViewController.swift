@@ -10,12 +10,11 @@ import UIKit
 
 class TaskViewController: UITableViewController {
     
-    var tasksDataSource: [TaskCompleterModel] = []
-    var saveTask = SaveLoadTaskCompleterModels.saveTasks(<#T##self: SaveLoadTaskCompleterModels##SaveLoadTaskCompleterModels#>)
+    var tasksDataSource = TaskStorage.sharedTaskStorage.taskDataSource
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadTasks()
+        TaskStorage.sharedTaskStorage.loadTasks()
         setupUI()
         tableView.reloadData()
     }
@@ -41,25 +40,9 @@ class TaskViewController: UITableViewController {
         tableView.performBatchUpdates({
             tasksDataSource.insert(TaskCompleterModel(name: task, taskDetail: nil, taskCompleted: nil), at: 0)
             let indexPath = IndexPath(row: 0, section: 0)
-            saveTasks(tasks: tasksDataSource)
+            TaskStorage.sharedTaskStorage.saveTasks(taskDataSource: tasksDataSource)
             tableView.insertRows(at: [indexPath], with: .automatic)
         }, completion: nil)
-    }
-    
-    private func saveTasks(tasks: [TaskCompleterModel]) {
-        let defaults = UserDefaults.standard
-        if let data = try? JSONEncoder().encode(tasks) {
-            defaults.set(data, forKey: "task")
-        }
-    }
-    
-    private func loadTasks() {
-        if let savedTasks = UserDefaults.standard.object(forKey: "task") as? Data {
-            let decoder = JSONDecoder()
-            if let loadedTasks = try? decoder.decode([TaskCompleterModel].self, from: savedTasks) {
-                tasksDataSource = loadedTasks
-            }
-        }
     }
 }
 
