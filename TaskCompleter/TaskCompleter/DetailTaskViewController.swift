@@ -12,6 +12,7 @@ class DetailTaskViewController: UIViewController {
     @IBOutlet var taskLabel: UILabel!
     @IBOutlet var taskDetails: UITextView!
     var currentTask = String()
+    var taskStorage = TaskStorage.sharedTaskStorage
     
     
     override func viewDidLoad() {
@@ -23,15 +24,20 @@ class DetailTaskViewController: UIViewController {
     
     private func setupDetailVIewUI() {
         taskLabel?.text = currentTask
-    }
-    
-    private func saveTaskDetails(with taskDetails: String) {
-        let defaults = UserDefaults.standard
-        defaults.set(TaskCompleterModel(name: currentTask, taskDetail: taskDetails, taskCompleted: nil), forKey: "taskDetails")
-    }
-    
-    private func loadTaskDetails() {
+        let saveButton = UIBarButtonItem.init(barButtonSystemItem: .save, target: self, action: #selector(saveTaskDetails))
+        navigationItem.rightBarButtonItem = saveButton
         
+    }
+    
+    private func filterString(with selectedTask: String) {
+        let filteredString = taskStorage.taskDataSource.filter(selectedTask)
+    }
+    
+    @objc private func saveTaskDetails() {
+        var details = taskDetails.text
+        var taskCompleterModelArray = [TaskCompleterModel]()
+        
+        taskStorage.saveTasks(taskDataSource: [taskStorage.taskDataSource[0]])
     }
     
     @objc func dismissKeyboard() {
