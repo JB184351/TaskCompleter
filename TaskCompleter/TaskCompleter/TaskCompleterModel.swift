@@ -10,6 +10,6 @@ import Foundation
 
 struct TaskCompleterModel: Codable {
     var name: String
-    let taskDetail: String?
-    let taskCompleted: Bool?
+    var taskDetail: String?
+    var taskCompleted: Bool?
 }

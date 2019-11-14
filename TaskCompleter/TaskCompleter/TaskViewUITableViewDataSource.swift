@@ -23,8 +23,10 @@ extension TaskViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let vc = storyboard?.instantiateViewController(withIdentifier: "DetailTask") as? DetailTaskViewController {
+            vc.taskCompleterModelIndex = tableView.indexPathForSelectedRow?.row ?? 0
             vc.currentTask = TaskStorage.sharedTaskStorage.taskDataSource[indexPath.row].name
             navigationController?.pushViewController(vc, animated: true)
         }
+        
     }
 }

@@ -25,6 +25,7 @@ final class TaskStorage {
             let decoder = JSONDecoder()
             if let loadedTasks = try? decoder.decode([TaskCompleterModel].self, from: savedTasks) {
                 taskDataSource = loadedTasks
+                print(taskDataSource)
             }
         }
     }
