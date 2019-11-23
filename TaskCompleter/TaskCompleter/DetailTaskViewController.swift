@@ -9,9 +9,10 @@
 import UIKit
 
 class DetailTaskViewController: UIViewController {
+    
     @IBOutlet var taskLabel: UILabel!
     @IBOutlet var taskDetails: UITextView!
-    
+    var selectedTask: TaskCompleterModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,7 +22,8 @@ class DetailTaskViewController: UIViewController {
     }
     
     private func setupDetailVIewUI() {
-     
+        taskLabel.text = selectedTask?.name
+        taskDetails.text = selectedTask?.taskDetail
         let saveButton = UIBarButtonItem.init(barButtonSystemItem: .save, target: self, action: #selector(saveTaskDetails))
         navigationItem.rightBarButtonItem = saveButton
     
