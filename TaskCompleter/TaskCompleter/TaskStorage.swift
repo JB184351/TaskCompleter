@@ -10,8 +10,7 @@ import Foundation
 
 final class TaskStorage {
 
-    static let sharedTaskStorage = TaskStorage()
-    var taskDataSource = [TaskCompleterModel]()
+    static let shared = TaskStorage()
     
     func saveTasks(taskDataSource: [TaskCompleterModel]) {
         let defaults = UserDefaults.standard
@@ -20,13 +19,14 @@ final class TaskStorage {
         }
     }
     
-    func loadTasks() {
+    func loadTasks() -> [TaskCompleterModel]? {
         if let savedTasks = UserDefaults.standard.object(forKey: "task") as? Data {
             let decoder = JSONDecoder()
             if let loadedTasks = try? decoder.decode([TaskCompleterModel].self, from: savedTasks) {
-                taskDataSource = loadedTasks
-                print(taskDataSource)
+                print(loadedTasks)
+                return loadedTasks
             }
         }
+        return nil
     }
 }

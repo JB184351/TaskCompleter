@@ -10,11 +10,10 @@ import UIKit
 
 class TaskViewController: UITableViewController {
     
-    var tasksDataSource = TaskStorage.sharedTaskStorage.taskDataSource
+    var tasksDataSource = TaskStorage.shared.loadTasks() ?? [TaskCompleterModel]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        TaskStorage.sharedTaskStorage.loadTasks()
         setupUI()
         tableView.reloadData()
     }
@@ -40,9 +39,29 @@ class TaskViewController: UITableViewController {
         tableView.performBatchUpdates({
             tasksDataSource.insert(TaskCompleterModel(name: task, taskDetail: nil, taskCompleted: nil), at: 0)
             let indexPath = IndexPath(row: 0, section: 0)
-            TaskStorage.sharedTaskStorage.saveTasks(taskDataSource: tasksDataSource)
+            TaskStorage.shared.saveTasks(taskDataSource: tasksDataSource)
             tableView.insertRows(at: [indexPath], with: .automatic)
         }, completion: nil)
+    }
+}
+
+extension TaskViewController {
+  
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return tasksDataSource.count
+  }
+  
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Task", for: indexPath)
+        cell.textLabel?.text = tasksDataSource[indexPath.row].name
+        return cell
+  }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let vc = storyboard?.instantiateViewController(withIdentifier: "DetailTask") as? DetailTaskViewController {
+            navigationController?.pushViewController(vc, animated: true)
+        }
+        
     }
 }
 
