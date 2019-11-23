@@ -11,7 +11,6 @@ import UIKit
 class DetailTaskViewController: UIViewController {
     @IBOutlet var taskLabel: UILabel!
     @IBOutlet var taskDetails: UITextView!
-    var currentTask = String()
     
     
     override func viewDidLoad() {
@@ -22,13 +21,15 @@ class DetailTaskViewController: UIViewController {
     }
     
     private func setupDetailVIewUI() {
-        taskLabel?.text = currentTask
-        //navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editTask))
+     
+        let saveButton = UIBarButtonItem.init(barButtonSystemItem: .save, target: self, action: #selector(saveTaskDetails))
+        navigationItem.rightBarButtonItem = saveButton
+    
     }
     
-//    @objc func editTask(_ task: String) {
-//        print("Edit")
-//    }
+    @objc private func saveTaskDetails() {
+        
+    }
     
     @objc func dismissKeyboard() {
         view.endEditing(true)

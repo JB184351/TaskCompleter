@@ -10,11 +10,10 @@ import UIKit
 
 class TaskViewController: UITableViewController {
     
-    var tasksDataSource: [TaskCompleterModel] = []
+    var tasksDataSource = TaskStorage.shared.loadTasks() ?? [TaskCompleterModel]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadTasks()
         setupUI()
         tableView.reloadData()
     }
@@ -38,28 +37,31 @@ class TaskViewController: UITableViewController {
     
     func submitTask(_ task: String) {
         tableView.performBatchUpdates({
-            tasksDataSource.insert(TaskCompleterModel(title: task, taskDetail: nil, taskCompleted: nil), at: 0)
+            tasksDataSource.insert(TaskCompleterModel(name: task, taskDetail: nil, taskCompleted: nil), at: 0)
             let indexPath = IndexPath(row: 0, section: 0)
-            saveTasks(tasks: tasksDataSource)
+            TaskStorage.shared.saveTasks(taskDataSource: tasksDataSource)
             tableView.insertRows(at: [indexPath], with: .automatic)
         }, completion: nil)
     }
+}
+
+extension TaskViewController {
+  
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return tasksDataSource.count
+  }
+  
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Task", for: indexPath)
+        cell.textLabel?.text = tasksDataSource[indexPath.row].name
+        return cell
+  }
     
-    private func saveTasks(tasks: [TaskCompleterModel]) {
-        let defaults = UserDefaults.standard
-        if let data = try? JSONEncoder().encode(tasks) {
-            defaults.set(data, forKey: "task")
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let vc = storyboard?.instantiateViewController(withIdentifier: "DetailTask") as? DetailTaskViewController {
+            navigationController?.pushViewController(vc, animated: true)
         }
-    }
-    
-    private func loadTasks() {
-        if let savedTasks = UserDefaults.standard.object(forKey: "task") as? Data {
-            let decoder = JSONDecoder()
-            if let loadedTasks = try? decoder.decode([TaskCompleterModel].self, from: savedTasks) {
-                print(loadedTasks)
-                tasksDataSource = loadedTasks
-            }
-        }
+        
     }
 }
 
