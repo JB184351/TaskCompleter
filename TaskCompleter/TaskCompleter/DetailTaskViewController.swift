@@ -8,11 +8,16 @@
 
 import UIKit
 
+protocol DetailTaskDelegate: class {
+    func didUpdate(task: TaskCompleterModel?)
+}
+
 class DetailTaskViewController: UIViewController {
     
     @IBOutlet var taskLabel: UILabel!
     @IBOutlet var taskDetails: UITextView!
     var selectedTask: TaskCompleterModel?
+    weak var delegate: DetailTaskDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,11 +31,11 @@ class DetailTaskViewController: UIViewController {
         taskDetails.text = selectedTask?.taskDetail
         let saveButton = UIBarButtonItem.init(barButtonSystemItem: .save, target: self, action: #selector(saveTaskDetails))
         navigationItem.rightBarButtonItem = saveButton
-    
     }
     
     @objc private func saveTaskDetails() {
-        
+        selectedTask?.taskDetail = taskDetails.text
+        delegate?.didUpdate(task: selectedTask)
     }
     
     @objc func dismissKeyboard() {
