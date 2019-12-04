@@ -11,6 +11,7 @@ import UIKit
 class TaskViewController: UITableViewController {
     
     var tasksDataSource = TaskStorage.shared.loadTasks() ?? [TaskCompleterModel]()
+    var selectedTaskIndex = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,9 +60,20 @@ extension TaskViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let vc = storyboard?.instantiateViewController(withIdentifier: "DetailTask") as? DetailTaskViewController {
+            vc.delegate = self
+            vc.selectedTask = tasksDataSource[indexPath.row]
+            selectedTaskIndex = indexPath.row
             navigationController?.pushViewController(vc, animated: true)
         }
         
     }
 }
 
+extension TaskViewController: DetailTaskDelegate {
+    func didUpdate(task: TaskCompleterModel?) {
+        if let taskUnwrap = task {
+            tasksDataSource[selectedTaskIndex] = taskUnwrap
+            TaskStorage.shared.saveTasks(taskDataSource: tasksDataSource)
+        }
+    }
+}
