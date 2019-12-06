@@ -29,6 +29,9 @@ class DetailTaskViewController: UIViewController {
     private func setupDetailVIewUI() {
         taskLabel.text = selectedTask?.name
         taskDetails.text = selectedTask?.taskDetail
+        taskLabel.textColor = .black
+        taskDetails.textColor = .black
+        taskDetails.backgroundColor = .white
         let saveButton = UIBarButtonItem.init(barButtonSystemItem: .save, target: self, action: #selector(saveTaskDetails))
         navigationItem.rightBarButtonItem = saveButton
     }
