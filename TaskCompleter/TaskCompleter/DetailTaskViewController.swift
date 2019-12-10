@@ -65,13 +65,11 @@ class DetailTaskViewController: UIViewController {
     
     private func isTaskCompleted() {
         if isTaskDone {
-            if var isDone = selectedTask {
-                isDone.taskCompleted = true
-                isTaskDoneSwitch.isOn = userdefaults.bool(forKey: "switchValue")
+            selectedTask?.taskCompleted = true
+            isTaskDoneSwitch.isOn = userdefaults.bool(forKey: "switchValue")
             } else {
                 selectedTask?.taskCompleted = false
                 isTaskDoneSwitch.isOn = userdefaults.bool(forKey: "switchValue")
             }
         }
     }
-}
