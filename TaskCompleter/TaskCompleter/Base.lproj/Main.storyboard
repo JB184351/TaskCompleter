@@ -3,7 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -61,26 +61,45 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Task Details Go Here" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Ec5-ZS-als">
-                                <rect key="frame" x="8" y="123" width="398" height="731"/>
+                                <rect key="frame" x="8" y="213.5" width="398" height="640.5"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="RMC-4W-LpD">
+                                <rect key="frame" x="12" y="174.5" width="59" height="31"/>
+                            </switch>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Task Completed?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wKM-cV-cYL">
+                                <rect key="frame" x="12" y="145" width="202" height="14.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="eil-xr-gbM" firstAttribute="trailing" secondItem="Ec5-ZS-als" secondAttribute="trailing" constant="8" id="6D1-9C-u75"/>
+                            <constraint firstItem="RMC-4W-LpD" firstAttribute="top" secondItem="wKM-cV-cYL" secondAttribute="bottom" constant="15" id="0fh-T5-yuv"/>
+                            <constraint firstItem="eil-xr-gbM" firstAttribute="trailing" secondItem="wKM-cV-cYL" secondAttribute="trailing" constant="200" id="2dZ-sb-WAY"/>
+                            <constraint firstItem="Ec5-ZS-als" firstAttribute="top" secondItem="RMC-4W-LpD" secondAttribute="bottom" constant="8" id="3Yj-pE-7dF"/>
+                            <constraint firstItem="wKM-cV-cYL" firstAttribute="top" secondItem="eil-xr-gbM" secondAttribute="top" constant="101" id="6ed-ew-4Pp"/>
+                            <constraint firstItem="wKM-cV-cYL" firstAttribute="leading" secondItem="eil-xr-gbM" secondAttribute="leading" constant="12" id="M5U-7I-UXJ"/>
                             <constraint firstItem="ROk-U9-dVx" firstAttribute="centerX" secondItem="HYe-cn-hYh" secondAttribute="centerX" id="Ocr-aJ-UhD"/>
-                            <constraint firstItem="Ec5-ZS-als" firstAttribute="leading" secondItem="eil-xr-gbM" secondAttribute="leading" constant="8" id="Qkh-WZ-chK"/>
+                            <constraint firstItem="eil-xr-gbM" firstAttribute="trailing" secondItem="Ec5-ZS-als" secondAttribute="trailing" constant="8" id="Plr-wp-9r0"/>
+                            <constraint firstItem="Ec5-ZS-als" firstAttribute="leading" secondItem="eil-xr-gbM" secondAttribute="leading" constant="8" id="Pqt-68-a8U"/>
                             <constraint firstItem="ROk-U9-dVx" firstAttribute="top" secondItem="eil-xr-gbM" secondAttribute="top" constant="8" id="b3p-8m-V1Z"/>
-                            <constraint firstItem="Ec5-ZS-als" firstAttribute="top" secondItem="ROk-U9-dVx" secondAttribute="bottom" constant="50" id="gO5-XF-jD9"/>
-                            <constraint firstItem="eil-xr-gbM" firstAttribute="bottom" secondItem="Ec5-ZS-als" secondAttribute="bottom" constant="8" id="tpm-0a-e6H"/>
+                            <constraint firstItem="Ec5-ZS-als" firstAttribute="top" secondItem="RMC-4W-LpD" secondAttribute="bottom" constant="8" id="gOe-aw-l0R"/>
+                            <constraint firstItem="RMC-4W-LpD" firstAttribute="top" secondItem="wKM-cV-cYL" secondAttribute="bottom" constant="15" id="gRw-Ak-n5G"/>
+                            <constraint firstItem="eil-xr-gbM" firstAttribute="bottom" secondItem="Ec5-ZS-als" secondAttribute="bottom" constant="8" id="qA0-zj-CT8"/>
+                            <constraint firstItem="RMC-4W-LpD" firstAttribute="leading" secondItem="eil-xr-gbM" secondAttribute="leading" constant="12" id="yzG-yt-ZcD"/>
+                            <constraint firstItem="eil-xr-gbM" firstAttribute="trailing" secondItem="RMC-4W-LpD" secondAttribute="trailing" constant="345" id="zd6-35-xOU"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="eil-xr-gbM"/>
                     </view>
                     <navigationItem key="navigationItem" id="g6j-uQ-ewn"/>
                     <connections>
+                        <outlet property="isTaskDoneLabel" destination="wKM-cV-cYL" id="kw8-Bs-Qhb"/>
+                        <outlet property="isTaskDoneSwitch" destination="RMC-4W-LpD" id="rOo-2s-bDP"/>
                         <outlet property="taskDetails" destination="Ec5-ZS-als" id="4P5-pM-ntz"/>
                         <outlet property="taskLabel" destination="ROk-U9-dVx" id="2nD-oT-Ug5"/>
                     </connections>
