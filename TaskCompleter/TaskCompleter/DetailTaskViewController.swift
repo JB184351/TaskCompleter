@@ -33,7 +33,6 @@ class DetailTaskViewController: UIViewController {
         
     }
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupDetailVIewUI()
