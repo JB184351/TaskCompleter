@@ -22,22 +22,23 @@ class DetailTaskViewController: UIViewController {
     weak var delegate: DetailTaskDelegate?
     let userdefaults = UserDefaults.standard
     
-    var isTaskDone = false {
-        didSet {
-            if isTaskDoneSwitch.isOn == true {
-                isTaskDone = true
-                userdefaults.set(isTaskDoneSwitch.isOn, forKey: "switchValue")
-            } else {
-                isTaskDone = false
-                userdefaults.set(isTaskDoneSwitch.isOn, forKey: "switchValue")
-            }
+    @objc func isTaskCompletead() {
+        if isTaskDoneSwitch.isOn {
+            selectedTask?.taskCompleted = true
+            isTaskDoneSwitch.setOn(isTaskDoneSwitch.isOn, animated: true)
+        } else {
+            selectedTask?.taskCompleted = false
+            isTaskDoneSwitch.setOn(isTaskDoneSwitch.isOn, animated: true)
         }
+        
     }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupDetailVIewUI()
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
+        isTaskDoneSwitch.addTarget(self, action: #selector(isTaskCompletead), for: .valueChanged)
         view.addGestureRecognizer(tap)
     }
     
@@ -53,23 +54,31 @@ class DetailTaskViewController: UIViewController {
     }
     
     @objc private func saveTaskDetails() {
-        selectedTask?.taskDetail = taskDetails.text
-        isTaskCompleted()
+        unwrapSelectedTask()
         delegate?.didUpdate(task: selectedTask)
+    }
+    
+    func unwrapSelectedTask() {
+        selectedTask?.taskDetail = taskDetails.text
+        
+        if let taskDetails = selectedTask?.taskDetail {
+            selectedTask?.taskDetail = taskDetails
+        } else {
+            print("Selected Task Details are nil")
+        }
+        
+        if let taskCompleted = selectedTask?.taskCompleted {
+            selectedTask?.taskCompleted = taskCompleted
+        } else {
+            print("Selected Task completion state is nil")
+        }
+        
+        print(selectedTask)
+        
     }
     
     
     @objc func dismissKeyboard() {
         view.endEditing(true)
     }
-    
-    private func isTaskCompleted() {
-        if isTaskDone {
-            selectedTask?.taskCompleted = true
-            isTaskDoneSwitch.isOn = userdefaults.bool(forKey: "switchValue")
-            } else {
-                selectedTask?.taskCompleted = false
-                isTaskDoneSwitch.isOn = userdefaults.bool(forKey: "switchValue")
-            }
-        }
-    }
+}
